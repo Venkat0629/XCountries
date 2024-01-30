@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [data, setData] = useState({});
+  const [value, setValue] = useState(null);
+  const handleChange = (e) => setValue(e.target.value);
 
   useEffect(() => {
     const url = "https://restcountries.com/v3.1/all";
@@ -21,10 +23,26 @@ function App() {
 
   return (
     <div className="App">
-      <Countries data={data} />
+      <div className="search">
+        <input
+          type="text"
+          placeholder="Search for countries"
+          onChange={handleChange}
+          className="text"
+        ></input>
+      </div>
+
+      <Countries
+        data={
+          value
+            ? data.filter((item) =>
+                item.name.common.toLowerCase().includes(value.toLowerCase())
+              )
+            : data
+        }
+      />
     </div>
   );
 }
 
 export default App;
-
