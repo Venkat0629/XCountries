@@ -3,15 +3,13 @@ import Countries from "./Countries/Countries";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [data, setData] = useState({});
-  const [value, setValue] = useState(null);
-  const handleChange = (e) => setValue(e.target.value);
+  const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const url = "https://restcountries.com/v3.1/all";
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch("https://restcountries.com/v3.1/all");
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -21,26 +19,27 @@ function App() {
     fetchData();
   }, []);
 
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredData = data.filter((item) =>
+    item.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="App">
       <div className="search">
         <input
           type="text"
           placeholder="Search for countries"
-          onChange={handleChange}
+          value={searchTerm}
+          onChange={handleSearch}
           className="text"
         ></input>
       </div>
 
-      <Countries
-        data={
-          value
-            ? data.filter((item) =>
-                item.name.common.toLowerCase().includes(value.toLowerCase())
-              )
-            : data
-        }
-      />
+      <Countries data={filteredData} />
     </div>
   );
 }
