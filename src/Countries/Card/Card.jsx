@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styles from "./Card.module.css";
 
 export default function Card({ cardData }) {
@@ -9,7 +9,7 @@ export default function Card({ cardData }) {
         alt={cardData.flags.alt}
         className={styles.image}
       />
-      <h4 className={styles.title}>{cardData.name.common}</h4>
+      <p className={styles.title}>{cardData.name.common}</p>
     </div>
   );
 }
