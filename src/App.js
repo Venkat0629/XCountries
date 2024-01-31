@@ -24,7 +24,7 @@ function App() {
   };
 
   const filteredData = data.filter((item) =>
-    item.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+    item.name.common.includes(searchTerm)
   );
 
   return (
