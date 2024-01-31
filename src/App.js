@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,12 +36,10 @@ function App() {
           value={searchTerm}
           onChange={handleSearch}
           className="text"
-        ></input>
+        />
       </div>
-
-      <Countries data={filteredData} />
+      {data.length > 0 ? <Countries data={filteredData} /> : <p>Loading...</p>}
     </div>
   );
 }
-
 export default App;
