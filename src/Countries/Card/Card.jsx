@@ -1,15 +1,15 @@
 import React from "react";
-import styles from "./Card.module.css";
+import "./Card.css";
 
 export default function Card({ cardData }) {
   return (
-    <div className={styles.countryCard}>
+    <div className="countryCard">
       <img
         src={cardData.flags.png}
         alt={cardData.flags.alt}
-        className={styles.image}
+        className="image"
       />
-      <p className={styles.title}>{cardData.name.common}</p>
+      <p className="title">{cardData.name.common}</p>
     </div>
   );
 }
